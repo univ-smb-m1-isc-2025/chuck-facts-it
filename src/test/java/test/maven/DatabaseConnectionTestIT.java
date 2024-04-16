@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class DatabaseConnectionTest {
+public class DatabaseConnectionTestIT {
 
     private Connection connection;
     private final String jdbcUrl = "jdbc:postgresql://localhost:5432/postgres";
