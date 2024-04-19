@@ -1,4 +1,4 @@
-package test.maven;
+package me.guillaume.chuck_facts;
 
 
 import org.junit.jupiter.api.AfterEach;
@@ -16,12 +16,13 @@ public class DatabaseConnectionTestIT {
 
     private Connection connection;
     private final String jdbcUrl = "jdbc:postgresql://localhost:5432/postgres";
+    
+    // FIXME : remove duplication with docker compose
     private final String username = "postgres";
     private final String password = "password";
 
     @BeforeEach
     public void setUp() throws Exception {
-        // Initialize the connection
         try {
             connection = DriverManager.getConnection(jdbcUrl, username, password);
         } catch (SQLException e) {
@@ -32,7 +33,6 @@ public class DatabaseConnectionTestIT {
 
     @AfterEach
     public void tearDown() throws Exception {
-        // Close the connection after each test
         if (connection != null) {
             try {
                 connection.close();
@@ -44,10 +44,8 @@ public class DatabaseConnectionTestIT {
 
     @Test
     public void testConnection() {
-        // Check if the connection is not null
         assertNotNull(connection, "Connection should not be null");
         try {
-            // Check if the connection is valid
             assertTrue(connection.isValid(5), "Connection should be valid");
         } catch (SQLException e) {
             e.printStackTrace();
