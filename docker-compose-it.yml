@@ -21,3 +21,6 @@ services:
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=password
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - LOGGING_CONFIG=/data/logback_config/logback.xml
+    volumes:
+      - ./logback.xml:/data/logback_config/logback.xml
