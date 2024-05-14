@@ -1,0 +1,1 @@
+DELETE FROM chuck_fact WHERE id = 1;
