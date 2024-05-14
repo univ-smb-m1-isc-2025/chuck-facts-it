@@ -70,7 +70,7 @@
                         </goals>
                         <configuration>
                             <workingDirectory>${maven.multiModuleProjectDirectory}</workingDirectory>
-                            <executable>docker-compose-it-up.sh</executable>
+                            <executable>docker-compose-up.sh</executable>
                         </configuration>
                     </execution>
                     <execution>
@@ -81,7 +81,7 @@
                         </goals>
                         <configuration>
                             <workingDirectory>${maven.multiModuleProjectDirectory}</workingDirectory>
-                            <executable>docker-compose-it-down.sh</executable>
+                            <executable>docker-compose-down.sh</executable>
                         </configuration>
                     </execution>
                 </executions>

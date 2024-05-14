@@ -4,16 +4,9 @@ import org.awaitility.Awaitility;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.client.RestTemplate;
 
-import javax.sql.DataSource;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import me.guillaume.integration_testing.DBInitializer;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static me.guillaume.integration_testing.DBInitializer.run;
@@ -29,17 +22,17 @@ public class EndToEndTestIT {
 
 
     @Test
-    public void testHealthCheckEndpoint() {
+    public void should_Read_From_Database() {
 
         // FIXME : Hack until this is solved in .sh in a similar manner than postgres start-up
         Awaitility.await()
-                .pollDelay(60 * 5, SECONDS)
-                .atMost((60 * 5) + 1, SECONDS)
+                .pollDelay(60 * 3, SECONDS)
+                .atMost((60 * 3) + 1, SECONDS)
                 .until(() -> true);
 
         RestTemplate template = new RestTemplate();
 
-        String url = "https://chuck.oups.net/api/chuck-facts";
+        String url = "http://localhost:8080/api/chuck-facts";
 
         String response = template.getForObject(url, String.class);
 

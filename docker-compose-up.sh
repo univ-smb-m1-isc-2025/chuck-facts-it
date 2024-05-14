@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-DOCKER_COMPOSE_FILE=docker-compose-it.yml
+DOCKER_COMPOSE_FILE=docker-compose.yml
 
 _docker_compose_get_image_name() {
     image_name=$(fgrep --no-filename --max-count=1 image "${DOCKER_COMPOSE_FILE}" | cut -d':' -f2-)

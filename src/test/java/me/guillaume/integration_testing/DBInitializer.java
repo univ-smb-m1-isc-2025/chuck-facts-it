@@ -16,10 +16,10 @@ public class DBInitializer {
     private static final String password = "password";
 
     public static void run(String first) throws IOException {
-        DataSource dataSource = new DriverManagerDataSource(jdbcUrl, username, password);
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        var dataSource = new DriverManagerDataSource(jdbcUrl, username, password);
+        var jdbcTemplate = new JdbcTemplate(dataSource);
 
-        String sql = new String(Files.readAllBytes(Paths.get(first)));
+        var sql = new String(Files.readAllBytes(Paths.get(first)));
         for (String statement : sql.split(";")) {
             if (!statement.trim().isEmpty()) {
                 jdbcTemplate.execute(statement.trim());

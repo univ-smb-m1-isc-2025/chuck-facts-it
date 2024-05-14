@@ -22,7 +22,7 @@ public class APITestIT {
 
         RestTemplate template = new RestTemplate();
 
-        String url = "https://chuck.oups.net/api/chuck-facts";
+        String url = "http://localhost:8080/api/chuck-facts";
 
         String response = template.getForObject(url, String.class);
 
