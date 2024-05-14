@@ -48,7 +48,7 @@ public class EndToEndTestIT {
     }
 
     @AfterAll
-    public void tearDown() throws IOException {
+    public static void tearDown() throws IOException {
         run("src/test/resources/EndToEndTestIT.post.sql");
     }
 
