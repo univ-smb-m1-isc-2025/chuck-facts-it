@@ -3,7 +3,6 @@ package me.guillaume.chuck_facts;
 import org.awaitility.Awaitility;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -14,30 +13,20 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import me.guillaume.integration_testing.DBInitializer;
+
 import static java.util.concurrent.TimeUnit.SECONDS;
+import static me.guillaume.integration_testing.DBInitializer.run;
 import static org.assertj.core.api.Assertions.assertThat;
 
 // FIXME : define naming convention to link test to data
 public class EndToEndTestIT {
 
-    // FIXME : remove duplication by providing a utility that extract following from docker docker compose
-    private final String username = "postgres";
-    private final String jdbcUrl = "jdbc:postgresql://localhost:5432/postgres";
-    private final String password = "password";
-
     @BeforeAll
-    public void setUp() throws IOException {
-
-        DataSource dataSource = new DriverManagerDataSource(jdbcUrl, username, password);
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-
-        String sql = new String(Files.readAllBytes(Paths.get("src/test/resources/EndToEndTestIT.pre.sql")));
-        for (String statement : sql.split(";")) {
-            if (!statement.trim().isEmpty()) {
-                jdbcTemplate.execute(statement.trim());
-            }
-        }
+    public static void setUp() throws IOException {
+        run("src/test/resources/EndToEndTestIT.pre.sql");
     }
+
 
     @Test
     public void testHealthCheckEndpoint() {
@@ -60,16 +49,7 @@ public class EndToEndTestIT {
 
     @AfterAll
     public void tearDown() throws IOException {
-
-        DataSource dataSource = new DriverManagerDataSource(jdbcUrl, username, password);
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-
-        String sql = new String(Files.readAllBytes(Paths.get("src/test/resources/EndToEndTestIT.post.sql")));
-        for (String statement : sql.split(";")) {
-            if (!statement.trim().isEmpty()) {
-                jdbcTemplate.execute(statement.trim());
-            }
-        }
+        run("src/test/resources/EndToEndTestIT.post.sql");
     }
 
 
