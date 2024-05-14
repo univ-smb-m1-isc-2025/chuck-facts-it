@@ -1,1 +1,1 @@
-DELETE FROM chuck_fact WHERE id = 1;
+DELETE FROM chuck_fact WHERE id = 100;
