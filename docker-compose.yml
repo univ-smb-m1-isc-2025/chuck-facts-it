@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: password
 
   chuck-facts:
-    image: ghcr.io/gjambet/chuck-facts:master
+    image: ghcr.io/univ-smb-m1-isc-2025/chuck-facts:master
     container_name: chuck-facts
     ports:
       - 8080:8080
